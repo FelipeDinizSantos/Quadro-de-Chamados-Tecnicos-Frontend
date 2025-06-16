@@ -1,0 +1,37 @@
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-options a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.form-options a:hover {
+    text-decoration: underline;
+}
+
+.register-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-align: center;
+}
+
+.register-text a {
+    color: #2563eb;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
