@@ -1,6 +1,24 @@
+'use client';
+
+import { useAuth } from '../../context/AuthContext';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import "./chamados.module.css";
 
 export default function ChamadosPage() {
+    const { isAuthenticated } = useAuth();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            router.push('/');
+        }
+    }, [isAuthenticated, router]);
+
+    if (!isAuthenticated) {
+        return <p>Carregando...</p>;
+    }
+
     return (
         <div className="container">
             <div className="inner">
