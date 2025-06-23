@@ -1,6 +1,6 @@
 'use client';
 
-import './Login.module.css';
+import './Login.css';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -37,7 +37,7 @@ export default function LoginPage() {
 
       localStorage.setItem('token', data.token);
 
-      router.push('/chamados');
+      router.push('/chamados/abrir');
     } catch (err) {
       console.error(err);
       setErro('Erro na conexão com o servidor.');
@@ -79,13 +79,6 @@ export default function LoginPage() {
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                 />
-              </div>
-
-              <div className="form-options">
-                <div className="remember">
-                  <input id="remember" type="checkbox" />
-                  <label htmlFor="remember">Lembre de mim</label>
-                </div>
               </div>
 
               {erro && <p style={{ color: 'red' }}>{erro}</p>}
