@@ -3,7 +3,7 @@
 import { useAuth } from '../../../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import './detalhesChamado.css';
+import '../chamados.css';
 import RespostasChamado from '@/components/RespostaChamados';
 
 type Chamado = {
@@ -19,7 +19,7 @@ type Chamado = {
 };
 
 export default function DetalhesChamadoPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const { id } = useParams();
   const router = useRouter();
 
@@ -49,7 +49,6 @@ export default function DetalhesChamadoPage() {
         }
 
         const data = await res.json();
-        console.log(data);
         setChamado(data.chamado);
       } catch (err: any) {
         setErro(err.message);
@@ -69,6 +68,9 @@ export default function DetalhesChamadoPage() {
 
   if (!chamado) return <p>Chamado não encontrado.</p>;
 
+  // Determinar tipo de visualização
+  const respostaType = user?.perfil_id === 2 ? 'usuario tecnico' : 'usuario om';
+
   return (
     <div className="container">
       <div className="inner">
@@ -84,8 +86,9 @@ export default function DetalhesChamadoPage() {
             <span>Função Técnica: {chamado.funcao_tecnica_nome || '—'}</span>
             <span>Técnico: {chamado.tecnico_nome || '—'}</span>
           </div>
-          
-            <RespostasChamado chamadoId={chamado.id} />
+
+          {/* Renderiza respostas de forma diferente conforme perfil */}
+          <RespostasChamado chamadoId={chamado.id} type={respostaType} />
         </div>
       </div>
     </div>

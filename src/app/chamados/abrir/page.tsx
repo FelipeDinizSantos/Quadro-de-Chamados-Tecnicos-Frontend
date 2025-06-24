@@ -233,7 +233,7 @@ export default function AbrirChamadosPage() {
                   onChange={handleChange}
                 >
                   <option value="">Selecione a função técnica</option>
-                  {funcoesTecnicas.map((funcao) => (
+                  {funcoesTecnicas.map((funcao: {id: number, nome: string}) => (
                     <option key={funcao.id} value={funcao.id}>
                       {funcao.nome}
                     </option>
@@ -252,7 +252,7 @@ export default function AbrirChamadosPage() {
                     onChange={handleChange}
                   >
                     <option value="">Selecione o usuário técnico</option>
-                    {usuariosTecnicos.map((usuario) => (
+                    {usuariosTecnicos.map((usuario:{id:number, nome: string, email: string}) => (
                       <option key={usuario.id} value={usuario.id}>
                         {usuario.nome} ({usuario.email})
                       </option>

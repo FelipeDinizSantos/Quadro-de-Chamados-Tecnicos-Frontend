@@ -1,0 +1,9 @@
+.link-detalhes {
+  color: #2563eb;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.link-detalhes:hover {
+  color: #1d4ed8;
+}

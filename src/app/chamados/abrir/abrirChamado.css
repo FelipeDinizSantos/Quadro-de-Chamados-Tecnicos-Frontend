@@ -5,11 +5,11 @@
 }
 
 .link-meus-chamados a {
-  color: #6b7280; /* cinza discreto */
+  color: #6b7280; 
   text-decoration: underline;
   font-weight: 500;
 }
 
 .link-meus-chamados a:hover {
-  color: #374151; /* um cinza mais escuro no hover */
+  color: #374151;
 }

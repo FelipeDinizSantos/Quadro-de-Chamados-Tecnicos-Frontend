@@ -14,9 +14,10 @@ type Resposta = {
 
 type RespostasChamadoProps = {
   chamadoId: number;
+  type: 'usuario om' | 'usuario tecnico' 
 };
 
-export default function RespostasChamado({ chamadoId }: RespostasChamadoProps) {
+export default function RespostasChamado({ chamadoId, type }: RespostasChamadoProps) {
   const { isAuthenticated, user } = useAuth();
 
   const [respostas, setRespostas] = useState<Resposta[]>([]);
@@ -139,13 +140,17 @@ export default function RespostasChamado({ chamadoId }: RespostasChamadoProps) {
           <button type="submit" disabled={enviando}>
             {enviando ? 'Enviando...' : 'Enviar Resposta'}
           </button>
-          <button
-            type="button"
-            className="botao-status"
-            onClick={() => setShowStatusModal(true)}
-          >
-            Alterar Status
-          </button>
+          {
+            type == "usuario tecnico" && (
+              <button
+                type="button"
+                className="botao-status"
+                onClick={() => setShowStatusModal(true)}
+              >
+                Alterar Status
+              </button>
+            )
+          }
         </div>
       </form>
 
