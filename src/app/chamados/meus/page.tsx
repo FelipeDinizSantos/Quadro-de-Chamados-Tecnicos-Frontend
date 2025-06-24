@@ -13,6 +13,11 @@ type Chamado = {
   descricao: string;
   status: string;
   criado_em: string;
+  categoria_nome?: string;
+  funcao_tecnica_nome?: string;
+  tecnico_id?: number;
+  tecnico_nome?: string;
+  tecnico_email?: string;
 };
 
 export default function MeusChamadosPage() {
@@ -49,7 +54,6 @@ export default function MeusChamadosPage() {
         }
 
         const data = await res.json();
-        console.log(data);
         setChamados(data);
       } catch (error: any) {
         setErro(error.message);
@@ -79,7 +83,6 @@ export default function MeusChamadosPage() {
   return (
     <div className="container">
       <div className="inner">
-        <p className="title">Meus Chamados</p>
         <div className="card">
           <div className="card-content">
             <h1 className="form-title">Lista de Chamados</h1>
@@ -94,15 +97,23 @@ export default function MeusChamadosPage() {
             <div className="chamados-list">
               {chamados.map((chamado) => (
                 <div key={chamado.id} className="chamado-item">
+                  <span className={`chamado-status ${getStatusClass(chamado.status)}`}>
+                    {chamado.status.toUpperCase()}
+                  </span>
                   <h2 className="chamado-titulo">{chamado.titulo}</h2>
                   <p className="chamado-descricao">{chamado.descricao}</p>
+
                   <div className="chamado-info">
                     <span className="chamado-categoria">
-                      Criado em:{' '}
-                      {new Date(chamado.criado_em).toLocaleDateString('pt-BR')}
+                      Categoria: {chamado.categoria_nome || '—'}
                     </span>
-                    <span className={`chamado-status ${getStatusClass(chamado.status)}`}>
-                      {chamado.status.toUpperCase()}
+
+                    <span className="chamado-categoria">
+                      Função Técnica: {chamado.funcao_tecnica_nome || '—'}
+                    </span>
+
+                    <span className="chamado-categoria">
+                      Atribuído a: {chamado.tecnico_nome || 'Técnico não encontrado'}
                     </span>
                   </div>
                 </div>
@@ -115,7 +126,6 @@ export default function MeusChamadosPage() {
                 <Link href="/chamados/abrir">Clique aqui</Link>
               </p>
             </div>
-
           </div>
         </div>
       </div>

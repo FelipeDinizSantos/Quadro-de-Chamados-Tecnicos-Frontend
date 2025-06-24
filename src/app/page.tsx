@@ -3,6 +3,7 @@
 import './Login.css';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function LoginPage() {
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,9 +37,8 @@ export default function LoginPage() {
         return;
       }
 
-      localStorage.setItem('token', data.token);
-
-      router.push('/chamados/abrir');
+      await login(data.token);
+      router.push('/dashboard');
     } catch (err) {
       console.error(err);
       setErro('Erro na conexão com o servidor.');

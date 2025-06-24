@@ -4,37 +4,36 @@ import { useAuth } from '../../../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './abrirChamado.css';
+import { usePerfilRestrito } from '@/hooks/usePerfilRestrito';
 
 export default function AbrirChamadosPage() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
 
   const [funcoesTecnicas, setFuncoesTecnicas] = useState([]);
+  const [usuariosTecnicos, setUsuariosTecnicos] = useState([]);
   const [categorias, setCategorias] = useState([]);
+
   const [form, setForm] = useState({
     titulo: '',
     descricao: '',
     categoria_id: '',
     atribuido_funcao_tecnica_id: '',
+    atribuido_usuario_id: '',
   });
 
   const [loading, setLoading] = useState(false);
   const [mensagem, setMensagem] = useState('');
 
-  // Redireciona se não autenticado
   useEffect(() => {
     if (!isAuthenticated) {
       router.push('/');
     }
   }, [isAuthenticated, router]);
 
-  // Fetch funções técnicas e categorias
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      console.error('Token não encontrado');
-      return;
-    }
+    if (!token) return;
 
     const fetchFuncoes = async () => {
       try {
@@ -66,7 +65,43 @@ export default function AbrirChamadosPage() {
     fetchCategorias();
   }, []);
 
-  // 🔥 Handler do formulário
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    const fetchUsuariosTecnicos = async () => {
+      if (!form.atribuido_funcao_tecnica_id || !token) {
+        setUsuariosTecnicos([]);
+        return;
+      }
+
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/usuarios/usuarios-tecnicos-por-funcao?funcao_tecnica_id=${form.atribuido_funcao_tecnica_id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        if (!res.ok) throw new Error('Erro ao buscar usuários técnicos');
+        const data = await res.json();
+        setUsuariosTecnicos(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchUsuariosTecnicos();
+  }, [form.atribuido_funcao_tecnica_id]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+      ...(name === 'atribuido_funcao_tecnica_id' && { atribuido_usuario_id: '' }),
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -91,6 +126,7 @@ export default function AbrirChamadosPage() {
           descricao: form.descricao,
           categoria_id: parseInt(form.categoria_id),
           atribuido_funcao_tecnica_id: parseInt(form.atribuido_funcao_tecnica_id),
+          atribuido_usuario_id: parseInt(form.atribuido_usuario_id),
         }),
       });
 
@@ -105,7 +141,9 @@ export default function AbrirChamadosPage() {
         descricao: '',
         categoria_id: '',
         atribuido_funcao_tecnica_id: '',
+        atribuido_usuario_id: '',
       });
+      setUsuariosTecnicos([]);
     } catch (error: any) {
       setMensagem(error.message);
     } finally {
@@ -113,23 +151,43 @@ export default function AbrirChamadosPage() {
     }
   };
 
-  // 🔥 Handler de mudança nos inputs
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
   if (!isAuthenticated) {
     return <p>Carregando...</p>;
+  }
+
+  const { permitido } = usePerfilRestrito(['usuário da om']);
+
+  if (permitido === null) {
+    return <p>Verificando permissões...</p>;
+  }
+
+  if (permitido === false) {
+    return (
+      <div className="container">
+        <div className="inner">
+          <div className="card">
+            <div className="card-content">
+              <h1 className="form-title">Acesso Negado</h1>
+              <p>Você não tem permissão para abrir chamados.</p>
+              <button
+                onClick={() => router.push('/dashboard')}
+                className="action-button secondary"
+              >
+                Voltar para o Dashboard
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="container">
       <div className="inner">
-        <p className="title">Abrir Chamado</p>
         <div className="card">
           <div className="card-content">
-            <h1 className="form-title">Descreva sua Dúvida</h1>
+            <h1 className="form-title">Descreva o que Precisa</h1>
 
             {mensagem && <p style={{ color: mensagem.includes('sucesso') ? 'green' : 'red' }}>{mensagem}</p>}
 
@@ -166,15 +224,15 @@ export default function AbrirChamadosPage() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="tecnico">Técnico</label>
+                <label htmlFor="funcaoTecnica">Função Técnica</label>
                 <select
                   name="atribuido_funcao_tecnica_id"
-                  id="tecnico"
+                  id="funcaoTecnica"
                   required
                   value={form.atribuido_funcao_tecnica_id}
                   onChange={handleChange}
                 >
-                  <option value="">Selecione o técnico</option>
+                  <option value="">Selecione a função técnica</option>
                   {funcoesTecnicas.map((funcao) => (
                     <option key={funcao.id} value={funcao.id}>
                       {funcao.nome}
@@ -182,6 +240,26 @@ export default function AbrirChamadosPage() {
                   ))}
                 </select>
               </div>
+
+              {form.atribuido_funcao_tecnica_id && (
+                <div className="form-group">
+                  <label htmlFor="usuarioTecnico">Usuário Técnico</label>
+                  <select
+                    name="atribuido_usuario_id"
+                    id="usuarioTecnico"
+                    required
+                    value={form.atribuido_usuario_id}
+                    onChange={handleChange}
+                  >
+                    <option value="">Selecione o usuário técnico</option>
+                    {usuariosTecnicos.map((usuario) => (
+                      <option key={usuario.id} value={usuario.id}>
+                        {usuario.nome} ({usuario.email})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               <div className="form-group">
                 <label htmlFor="descricao">Descrição detalhada</label>
@@ -199,6 +277,7 @@ export default function AbrirChamadosPage() {
                 {loading ? 'Enviando...' : 'Abrir Chamado'}
               </button>
             </form>
+
             <div className="link-meus-chamados">
               <p>
                 <a href="/chamados/meus">Visualizar meus chamados</a>
