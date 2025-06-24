@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import "./meusChamados.css";
+import "../chamados.css";
 
 type Chamado = {
   id: number;
@@ -107,14 +108,18 @@ export default function MeusChamadosPage() {
                     <span className="chamado-categoria">
                       Categoria: {chamado.categoria_nome || '—'}
                     </span>
-
                     <span className="chamado-categoria">
                       Função Técnica: {chamado.funcao_tecnica_nome || '—'}
                     </span>
-
                     <span className="chamado-categoria">
                       Atribuído a: {chamado.tecnico_nome || 'Técnico não encontrado'}
                     </span>
+                  </div>
+
+                  <div style={{ marginTop: '0.5rem' }}>
+                    <Link href={`/chamados/${chamado.id}`} className="link-detalhes">
+                      Ver detalhes e responder
+                    </Link>
                   </div>
                 </div>
               ))}

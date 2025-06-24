@@ -1,79 +1,9 @@
-/* Lista de Chamados */
-.chamados-list {
-  display: flex;
-  flex-direction: column;
-  gap: .7rem;
-  margin-top: 1rem;
-}
-
-.chamado-item {
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-  padding: 1.25rem;
-  background-color: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.chamado-titulo {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-.chamado-descricao {
-  font-size: 0.875rem;
-  color: #374151;
-  line-height: 1.2;
-}
-
-.chamado-info {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-}
-
-.chamado-categoria {
-  color: #6b7280;
-}
-
-.chamado-status {
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  margin-top: 2em;
-}
-
-/* Cores de Status */
-.status-aberto {
-  background-color: #dbeafe;
-  color: #1d4ed8 !important;
-}
-
-.status-finalizado {
-  background-color: #dcfce7;
-  color: #15803d;
-}
-
-/* Link para abrir chamado */
-.link-abrir {
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.875rem;
-}
-
-.link-abrir a {
+.link-detalhes {
   color: #2563eb;
+  font-size: 0.9rem;
   text-decoration: underline;
-  font-weight: 500;
 }
 
-.link-abrir a:hover {
+.link-detalhes:hover {
   color: #1d4ed8;
 }

@@ -1,0 +1,184 @@
+/* Container geral */
+.respostas-container {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem;
+}
+
+/* Título */
+.respostas-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Histórico */
+.respostas-historico {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Item de resposta */
+.resposta-item {
+  max-width: 70%;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.resposta-item.minha {
+  background-color: #dbeafe;
+  align-self: flex-end;
+}
+
+.resposta-item.outra {
+  background-color: #f3f4f6;
+  align-self: flex-start;
+}
+
+.resposta-autor {
+  font-size: 0.7rem;
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.resposta-mensagem {
+  font-size: 0.85rem;
+  color: #111827;
+}
+
+.resposta-data {
+  font-size: 0.65rem;
+  color: #9ca3af;
+  align-self: flex-end;
+}
+
+/* Nenhuma resposta */
+.nenhuma-resposta {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Feedback */
+.respostas-feedback {
+  font-size: 0.8rem;
+}
+
+/* Form */
+.resposta-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.resposta-textarea {
+  min-height: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  color: #111827;
+  font-size: 0.75rem;
+  resize: vertical;
+}
+
+.resposta-textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+/* Botões */
+.botoes-acoes {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.resposta-form button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+  border: none;
+  cursor: pointer;
+}
+
+.resposta-form button:hover {
+  background-color: #1d4ed8;
+}
+
+.resposta-form button:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.botao-status {
+  background-color: #ef4444 !important;
+}
+
+.botao-status:hover {
+  background-color: #b91c1c !important;
+}
+
+/* Modal Status */
+.status-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-modal {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 250px;
+}
+
+.status-modal h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.status-opcao {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.status-andamento {
+  background-color: #2563eb;
+}
+
+.status-concluido {
+  background-color: #16a34a;
+}
+
+.status-fechado {
+  background-color: #f87171;
+}
+
+.status-cancelar {
+  background-color: transparent;
+  border: 1px solid black;
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}

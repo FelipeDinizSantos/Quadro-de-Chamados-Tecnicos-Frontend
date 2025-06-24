@@ -23,7 +23,7 @@ html, body{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 28rem;
+    max-width: 40rem;
 }
 
 .card {
