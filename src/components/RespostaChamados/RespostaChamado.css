@@ -124,6 +124,13 @@
 
 .botao-status {
   background-color: #ef4444 !important;
+  color: white;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+  border: none;
+  cursor: pointer;
 }
 
 .botao-status:hover {

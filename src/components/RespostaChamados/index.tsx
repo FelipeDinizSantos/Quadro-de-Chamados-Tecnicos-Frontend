@@ -14,20 +14,23 @@ type Resposta = {
 
 type RespostasChamadoProps = {
   chamadoId: number;
-  type: 'usuario om' | 'usuario tecnico' 
+  type: 'usuario om' | 'usuario tecnico';
+  status: string;
 };
 
-export default function RespostasChamado({ chamadoId, type }: RespostasChamadoProps) {
+export default function RespostasChamado({ chamadoId, type, status }: RespostasChamadoProps) {
   const { isAuthenticated, user } = useAuth();
 
   const [respostas, setRespostas] = useState<Resposta[]>([]);
   const [mensagem, setMensagem] = useState('');
   const [enviando, setEnviando] = useState(false);
   const [feedback, setFeedback] = useState('');
-
   const [showStatusModal, setShowStatusModal] = useState(false);
 
-  // 🔥 Função para buscar as respostas do chamado
+  const statusBloqueado = status === 'concluido' || status === 'fechado';
+
+  console.log(statusBloqueado);
+
   const fetchRespostas = async () => {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -47,14 +50,25 @@ export default function RespostasChamado({ chamadoId, type }: RespostasChamadoPr
     }
   };
 
-  // 🔥 Carrega as respostas na montagem do componente
+  // Carrega as respostas na montagem
   useEffect(() => {
     if (isAuthenticated) {
       fetchRespostas();
     }
   }, [isAuthenticated, chamadoId]);
 
-  // 🔥 Enviar uma nova resposta
+  // Atualiza respostas a cada 5 minutos
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    const interval = setInterval(() => {
+      fetchRespostas();
+    }, 300000); // 5 minutos
+
+    return () => clearInterval(interval);
+  }, [isAuthenticated, chamadoId]);
+
+  // Enviar nova resposta
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setEnviando(true);
@@ -92,8 +106,40 @@ export default function RespostasChamado({ chamadoId, type }: RespostasChamadoPr
     }
   };
 
-  const handleChangeStatus = (status: string) => {
-    console.log('Status selecionado:', status);
+  // Atualizar o status do chamado
+  const atualizarStatusChamado = async (novoStatus: string) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setFeedback('Token não encontrado.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chamados/${chamadoId}/status`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ status: novoStatus }),
+      });
+
+      if (!res.ok) {
+        const erro = await res.json();
+        throw new Error(erro.error || 'Erro ao atualizar status');
+      }
+
+      setFeedback('Status atualizado com sucesso!');
+      await fetchRespostas();
+
+      if (typeof window != "undefined") window.location.reload();
+    } catch (err: any) {
+      setFeedback(err.message);
+    }
+  };
+
+  const handleChangeStatus = async (status: string) => {
+    await atualizarStatusChamado(status);
     setShowStatusModal(false);
   };
 
@@ -116,9 +162,7 @@ export default function RespostasChamado({ chamadoId, type }: RespostasChamadoPr
               key={r.id}
               className={`resposta-item ${isMinha ? 'minha' : 'outra'}`}
             >
-              <div className="resposta-autor">
-                {r.autor_nome}
-              </div>
+              <div className="resposta-autor">{r.autor_nome}</div>
               <div className="resposta-mensagem">{r.mensagem}</div>
               <div className="resposta-data">
                 {new Date(r.criado_em).toLocaleString('pt-BR')}
@@ -128,20 +172,14 @@ export default function RespostasChamado({ chamadoId, type }: RespostasChamadoPr
         })}
       </div>
 
-      <form className="resposta-form" onSubmit={handleSubmit}>
-        <textarea
-          className="resposta-textarea"
-          placeholder="Escreva sua resposta..."
-          value={mensagem}
-          onChange={(e) => setMensagem(e.target.value)}
-          required
-        ></textarea>
-        <div className="botoes-acoes">
-          <button type="submit" disabled={enviando}>
-            {enviando ? 'Enviando...' : 'Enviar Resposta'}
-          </button>
-          {
-            type == "usuario tecnico" && (
+      {statusBloqueado ? (
+        <>
+          <p style={{ color: '#6b7280', marginTop: '1rem' }}>
+            Não é possível adicionar novas respostas. O chamado está <strong>{status.replace('_', ' ')}</strong>.
+          </p>
+
+          {type === 'usuario tecnico' && (
+            <div style={{ marginTop: '1rem' }}>
               <button
                 type="button"
                 className="botao-status"
@@ -149,10 +187,44 @@ export default function RespostasChamado({ chamadoId, type }: RespostasChamadoPr
               >
                 Alterar Status
               </button>
-            )
-          }
-        </div>
-      </form>
+            </div>
+          )}
+        </>
+      ) : (
+        <form className="resposta-form" onSubmit={handleSubmit}>
+          <textarea
+            className="resposta-textarea"
+            placeholder="Escreva sua resposta..."
+            value={mensagem}
+            onChange={(e) => setMensagem(e.target.value)}
+            required
+          ></textarea>
+
+          <div className="botoes-acoes">
+            <button type="submit" disabled={enviando}>
+              {enviando ? 'Enviando...' : 'Enviar Resposta'}
+            </button>
+
+            {type === 'usuario tecnico' && (
+              <div>
+                <button
+                  type="button"
+                  className="botao-status"
+                  onClick={() => setShowStatusModal(true)}
+                >
+                  Alterar Status
+                </button>
+              </div>
+            )}
+          </div>
+        </form>
+      )}
+
+      {feedback && (
+        <p style={{ marginTop: '1rem', color: feedback.includes('sucesso') ? 'green' : 'red' }}>
+          {feedback}
+        </p>
+      )}
 
       {showStatusModal && (
         <div className="status-modal-overlay">

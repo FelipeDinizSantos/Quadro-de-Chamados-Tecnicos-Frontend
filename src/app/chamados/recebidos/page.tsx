@@ -83,10 +83,8 @@ export default function ChamadosRecebidosPage() {
             <div className="chamados-list">
               {chamados.map((chamado) => (
                 <div key={chamado.id} className="chamado-item">
-                  <span className={`chamado-status ${chamado.status === 'aberto' ? 'status-aberto' :
-                    chamado.status === 'finalizado' ? 'status-finalizado' : ''
-                    }`}>
-                    {chamado.status.toUpperCase()}
+                  <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
+                    {chamado.status === "em_andamento" ? 'EM ANDAMENTO' : chamado.status.toUpperCase()}
                   </span>
                   <h2 className="chamado-titulo">{chamado.titulo}</h2>
                   <p className="chamado-descricao">{chamado.descricao}</p>

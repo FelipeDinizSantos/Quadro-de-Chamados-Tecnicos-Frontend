@@ -66,17 +66,6 @@ export default function MeusChamadosPage() {
     fetchChamados();
   }, []);
 
-  const getStatusClass = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'aberto':
-        return 'status-aberto';
-      case 'fechado':
-        return 'status-finalizado';
-      default:
-        return '';
-    }
-  };
-
   if (!isAuthenticated) {
     return <p>Carregando...</p>;
   }
@@ -98,8 +87,8 @@ export default function MeusChamadosPage() {
             <div className="chamados-list">
               {chamados.map((chamado) => (
                 <div key={chamado.id} className="chamado-item">
-                  <span className={`chamado-status ${getStatusClass(chamado.status)}`}>
-                    {chamado.status.toUpperCase()}
+                  <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
+                    {chamado.status === "em_andamento" ? 'EM ANDAMENTO' : chamado.status.toUpperCase()}
                   </span>
                   <h2 className="chamado-titulo">{chamado.titulo}</h2>
                   <p className="chamado-descricao">{chamado.descricao}</p>

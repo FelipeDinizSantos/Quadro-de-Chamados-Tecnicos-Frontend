@@ -7,3 +7,24 @@
 .link-detalhes:hover {
   color: #1d4ed8;
 }
+
+/* Cores de status */
+.status-aberto {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-em_andamento {
+  background-color: #fef9c3 !important;
+  color: #92400e !important;
+}
+
+.status-concluido {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.status-fechado {
+  background-color: #fef2f2;
+  color: #991b1b;
+}

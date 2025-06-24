@@ -4,6 +4,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import '../chamados.css';
+import './detalhesChamado.css'
 import RespostasChamado from '@/components/RespostaChamados';
 
 type Chamado = {
@@ -68,7 +69,6 @@ export default function DetalhesChamadoPage() {
 
   if (!chamado) return <p>Chamado não encontrado.</p>;
 
-  // Determinar tipo de visualização
   const respostaType = user?.perfil_id === 2 ? 'usuario tecnico' : 'usuario om';
 
   return (
@@ -76,7 +76,7 @@ export default function DetalhesChamadoPage() {
       <div className="inner">
         <div className="chamado-item">
           <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
-            {chamado.status.toUpperCase()}
+            {chamado.status === "em_andamento" ? 'EM ANDAMENTO': chamado.status.toUpperCase()}
           </span>
           <h2 className="chamado-titulo">{chamado.titulo}</h2>
           <p className="chamado-descricao">{chamado.descricao}</p>
@@ -87,8 +87,7 @@ export default function DetalhesChamadoPage() {
             <span>Técnico: {chamado.tecnico_nome || '—'}</span>
           </div>
 
-          {/* Renderiza respostas de forma diferente conforme perfil */}
-          <RespostasChamado chamadoId={chamado.id} type={respostaType} />
+          <RespostasChamado chamadoId={chamado.id} type={respostaType} status={chamado.status} />
         </div>
       </div>
     </div>
