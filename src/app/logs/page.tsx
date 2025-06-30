@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import "./Logs.css";
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 type LogItem = {
     id: number;
@@ -76,6 +77,7 @@ export default function LogsPage() {
         <div className="container">
             <div className="inner">
                 <div className="card">
+                    <BotaoRetorno path='/dashboard' />
                     <div className="card-content">
                         <h1 className="form-title">Histórico de Logs do Sistema</h1>
 

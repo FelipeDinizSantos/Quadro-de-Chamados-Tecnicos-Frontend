@@ -6,6 +6,7 @@ import { useParams, useRouter } from 'next/navigation';
 import '../chamados.css';
 import './detalhesChamado.css'
 import RespostasChamado from '@/components/RespostaChamados';
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 type Chamado = {
   id: number;
@@ -69,15 +70,15 @@ export default function DetalhesChamadoPage() {
 
   if (!chamado) return <p>Chamado não encontrado.</p>;
 
-  let respostaType; 
-  
-  if(user?.perfil_id === 1){
-    respostaType = 'usuario om';  
+  let respostaType;
+
+  if (user?.perfil_id === 1) {
+    respostaType = 'usuario om';
   }
-  if(user?.perfil_id === 2){
-    respostaType = 'usuario tecnico'; 
+  if (user?.perfil_id === 2) {
+    respostaType = 'usuario tecnico';
   }
-  if(user?.perfil_id === 3 || user?.perfil_id === 4){
+  if (user?.perfil_id === 3 || user?.perfil_id === 4) {
     console.log('Admin/Comando');
     respostaType = 'admin/comando';
   }
@@ -88,8 +89,10 @@ export default function DetalhesChamadoPage() {
     <div className="container">
       <div className="inner">
         <div className="chamado-item">
+          
+        <BotaoRetorno path='/dashboard' />
           <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
-            {chamado.status === "em_andamento" ? 'EM ANDAMENTO': chamado.status.toUpperCase()}
+            {chamado.status === "em_andamento" ? 'EM ANDAMENTO' : chamado.status.toUpperCase()}
           </span>
           <h2 className="chamado-titulo">{chamado.titulo}</h2>
           <p className="chamado-descricao">{chamado.descricao}</p>

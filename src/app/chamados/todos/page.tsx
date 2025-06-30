@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import "../chamados.css";
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 type Chamado = {
     id: number;
@@ -81,6 +82,8 @@ export default function TodosChamadosPage() {
         <div className="container">
             <div className="inner">
                 <div className="card">
+
+                    <BotaoRetorno path='/dashboard' />
                     <div className="card-content">
                         <h1 className="form-title">Todos os Chamados Abertos</h1>
 

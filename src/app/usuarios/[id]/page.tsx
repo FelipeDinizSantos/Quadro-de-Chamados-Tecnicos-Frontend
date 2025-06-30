@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import "./Usuario.css";
 import "../Usuarios.css";
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 type RespostaChamado = {
     resposta_id: number;
@@ -262,6 +263,8 @@ export default function UsuarioDetalhesPage() {
         <div className="container">
             <div className="inner">
                 <div className="card">
+                    
+                    <BotaoRetorno path='/usuarios' />
                     <div className="card-content">
                         <h1 className="form-title">Perfil do Usuário</h1>
 

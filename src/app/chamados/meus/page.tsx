@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import "./meusChamados.css";
 import "../chamados.css";
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 type Chamado = {
   id: number;
@@ -79,6 +80,8 @@ export default function MeusChamadosPage() {
     <div className="container">
       <div className="inner">
         <div className="card">
+
+          <BotaoRetorno path='/dashboard' />
           <div className="card-content">
             <h1 className="form-title">Lista de Chamados</h1>
 

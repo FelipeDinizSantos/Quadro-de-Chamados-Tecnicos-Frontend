@@ -57,13 +57,18 @@
 }
 
 .link-detalhes {
-  background-color: red;
+  background-color: #2563eb;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   text-decoration: none;
   font-size: 0.875rem;
   transition: background-color 0.2s;
+}
+
+.link-detalhes:hover {
+  background-color: #1d4ed8;
+  color: white;
 }
 
 .no-data {

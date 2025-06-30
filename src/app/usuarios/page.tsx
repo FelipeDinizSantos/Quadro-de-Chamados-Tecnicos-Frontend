@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import "./Usuarios.css";
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 type Usuario = {
     id: number;
@@ -130,6 +131,8 @@ export default function UsuariosPage() {
         <div className="container">
             <div className="inner">
                 <div className="card">
+                    
+                    <BotaoRetorno path='/dashboard' />
                     <div className="card-content">
                         <h1 className="form-title">Usuários do Sistema</h1>
 

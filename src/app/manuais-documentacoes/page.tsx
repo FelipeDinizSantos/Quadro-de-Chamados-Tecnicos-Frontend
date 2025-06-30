@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import "./Documentos.css";
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 type Documento = {
     id: number;
@@ -57,6 +58,7 @@ export default function DocumentosPage() {
         <div className="container">
             <div className="inner">
                 <div className="card">
+                    <BotaoRetorno path='/dashboard' />
                     <div className="card-content">
                         <h1 className="form-title">Documentos Disponíveis</h1>
                         <div className="documentos-list">

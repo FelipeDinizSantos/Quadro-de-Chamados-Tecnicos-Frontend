@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Montserrat } from 'next/font/google'
+import Link from "next/link";
 
 import { AuthProvider } from '../context/AuthContext';
 
@@ -27,7 +28,14 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={montserrat.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <header className="titulo-principal">
+            <Link href="/dashboard">
+              <h1>Quadro de Comunicação Técnica</h1>
+            </Link>
+          </header>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

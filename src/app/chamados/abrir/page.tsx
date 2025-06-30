@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './abrirChamado.css';
 import { usePerfilRestrito } from '@/hooks/usePerfilRestrito';
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 export default function AbrirChamadosPage() {
   const { isAuthenticated, user } = useAuth();
@@ -166,6 +167,8 @@ export default function AbrirChamadosPage() {
       <div className="container">
         <div className="inner">
           <div className="card">
+
+            <BotaoRetorno path='/dashboard' />
             <div className="card-content">
               <h1 className="form-title">Acesso Negado</h1>
               <p>Você não tem permissão para abrir chamados.</p>
@@ -186,6 +189,8 @@ export default function AbrirChamadosPage() {
     <div className="container">
       <div className="inner">
         <div className="card">
+
+          <BotaoRetorno path='/dashboard' />
           <div className="card-content">
             <h1 className="form-title">Descreva o que Precisa</h1>
 
@@ -233,7 +238,7 @@ export default function AbrirChamadosPage() {
                   onChange={handleChange}
                 >
                   <option value="">Selecione a função técnica</option>
-                  {funcoesTecnicas.map((funcao: {id: number, nome: string}) => (
+                  {funcoesTecnicas.map((funcao: { id: number, nome: string }) => (
                     <option key={funcao.id} value={funcao.id}>
                       {funcao.nome}
                     </option>
@@ -252,7 +257,7 @@ export default function AbrirChamadosPage() {
                     onChange={handleChange}
                   >
                     <option value="">Selecione o usuário técnico</option>
-                    {usuariosTecnicos.map((usuario:{id:number, nome: string, email: string}) => (
+                    {usuariosTecnicos.map((usuario: { id: number, nome: string, email: string }) => (
                       <option key={usuario.id} value={usuario.id}>
                         {usuario.nome} ({usuario.email})
                       </option>

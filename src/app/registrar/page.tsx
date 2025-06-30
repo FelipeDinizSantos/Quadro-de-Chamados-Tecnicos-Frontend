@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import BotaoRetorno from '@/components/BotaoRetorno';
 
 export default function RegistroPage() {
     const router = useRouter();
@@ -43,7 +44,7 @@ export default function RegistroPage() {
             }
 
             alert('Usuário registrado com sucesso!');
-            router.push('/'); 
+            router.push('/');
         } catch (err) {
             console.error(err);
             setErro('Erro na conexão com o servidor.');
@@ -57,6 +58,8 @@ export default function RegistroPage() {
             <div className="inner">
                 <p className="title">Criação de Conta</p>
                 <div className="card">
+
+                    <BotaoRetorno path='/' />
                     <div className="card-content">
                         <h1 className="form-title">Registre-se</h1>
 
