@@ -69,7 +69,20 @@ export default function DetalhesChamadoPage() {
 
   if (!chamado) return <p>Chamado não encontrado.</p>;
 
-  const respostaType = user?.perfil_id === 2 ? 'usuario tecnico' : 'usuario om';
+  let respostaType; 
+  
+  if(user?.perfil_id === 1){
+    respostaType = 'usuario om';  
+  }
+  if(user?.perfil_id === 2){
+    respostaType = 'usuario tecnico'; 
+  }
+  if(user?.perfil_id === 3 || user?.perfil_id === 4){
+    console.log('Admin/Comando');
+    respostaType = 'admin/comando';
+  }
+
+  console.log(user?.perfil_id);
 
   return (
     <div className="container">

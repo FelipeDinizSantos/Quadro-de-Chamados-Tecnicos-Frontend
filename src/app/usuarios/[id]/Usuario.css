@@ -1,0 +1,314 @@
+/* Lista de Chamados */
+.chamados-list {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  margin-top: 1rem;
+}
+
+.chamado-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chamado-titulo {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.chamado-descricao {
+  font-size: 0.875rem;
+  margin-top: -.5rem;
+  color: #374151;
+}
+
+.chamado-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.chamado-categoria {
+  color: #6b7280;
+}
+
+.chamado-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  margin-top: 2em;
+  width: fit-content;
+}
+
+/* Cores de Status */
+.status-aberto {
+  background-color: #dbeafe;
+  color: #1d4ed8 !important;
+}
+
+.status-finalizado {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+/* Link para abrir chamado */
+.link-abrir {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.link-abrir a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.link-abrir a:hover {
+  color: #1d4ed8;
+}
+
+.chamado-criador {
+  background-color: #f9fafb;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px dashed #d1d5db;
+  font-size: 0.75rem;
+  color: #374151;
+  margin-top: 0.5rem;
+}
+
+.chamado-criador strong {
+  color: #111827;
+}
+
+.link-detalhes {
+  color: #2563eb;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.link-detalhes:hover {
+  color: #1d4ed8;
+}
+
+/* Cores de status */
+.status-aberto {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-em_andamento {
+  background-color: #fef9c3 !important;
+  color: #92400e !important;
+}
+
+.status-concluido {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.status-fechado {
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.respostas-list {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+.resposta-item {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.resposta-data {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.perfil-info {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.perfil-info p {
+  margin: 0.25rem 0;
+}
+
+.perfil-info strong {
+  color: #111827;
+}
+
+.dashboard-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.action-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  background-color: #2563eb;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #1d4ed8;
+}
+
+.action-button.secondary {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.action-button.secondary:hover {
+  background-color: #e5e7eb;
+}
+
+.logout-button {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  padding: 0.4rem 0.75rem;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #dc2626;
+}
+
+.no-data {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.chamado-links {
+  margin-top: 0.5rem;
+}
+
+.sub-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  color: #1f2937;
+  padding-bottom: 0.25rem;
+}
+
+.dashboard-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.action-select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #1d4ed8;
+}
+
+.action-button.secondary {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.action-button.secondary:hover {
+  background-color: #e5e7eb;
+}
+
+.action-button.danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.action-button.danger:hover {
+  background-color: #dc2626;
+}
+
+.action-button.secondary.danger {
+  background-color: #ef4444;
+  color: white;
+}
+
+.action-button.secondary.danger:hover {
+  background-color: #dc2626;
+}
+
+.admin-promo-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.promo-title {
+    font-size: 1rem;
+    color: #495057;
+    margin-bottom: 0.75rem;
+}
+
+/* Botão destacado para promoção */
+.action-button.highlight {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.action-button.highlight:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}

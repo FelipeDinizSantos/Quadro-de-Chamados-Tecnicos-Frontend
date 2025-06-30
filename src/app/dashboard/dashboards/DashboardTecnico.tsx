@@ -20,7 +20,7 @@ export default function DashboardTecnico({ usuario }: { usuario: any }) {
                 <div className="inner">
                     <div className="card">
                         <div className="card-content">
-                            <h1 className="form-title">Bem-vindo(a) {usuario.nome}</h1>
+                            <h1 className="form-title">Bem-vindo(a) </h1>
                             <div className="perfil-info">
                                 <p><strong>Nome:</strong> {usuario.nome}</p>
                                 <p><strong>Email:</strong> {usuario.email}</p>
@@ -35,8 +35,8 @@ export default function DashboardTecnico({ usuario }: { usuario: any }) {
                                 <Link href="/chamados/recebidos" className="action-button">
                                     📥 Chamados Recebidos
                                 </Link>
-                                <Link href="#" className="action-button secondary">
-                                    📘 Manuais
+                                <Link href="manuais-documentacoes" className="action-button secondary">
+                                    📘 Manuais e Documentação
                                 </Link>
                             </div>
                         </div>

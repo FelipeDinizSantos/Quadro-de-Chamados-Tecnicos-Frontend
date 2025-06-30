@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import DashboardOM from './dashboards/DashboardOM';
 import DashboardTecnico from './dashboards/DashboardTecnico';
+import DashboardComando from './dashboards/DashboardComando';
+import DashboardAdmin from './dashboards/DashboardADM';
 
 type UsuarioPerfil = {
   id: number;
@@ -79,6 +81,10 @@ export default function DashboardPage() {
       return <DashboardOM usuario={usuario} />;
     case 'usuário técnico':
       return <DashboardTecnico usuario={usuario} />;
+    case 'usuário comando':
+      return <DashboardComando usuario={usuario} />;
+    case 'admin':
+      return <DashboardAdmin usuario={usuario} />;
     default:
       return <p>Perfil não reconhecido.</p>;
   }

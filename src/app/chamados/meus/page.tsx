@@ -22,8 +22,13 @@ type Chamado = {
 };
 
 export default function MeusChamadosPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const router = useRouter();
+
+  if (user?.perfil_id === 3 || user?.perfil_id === 4) {
+    router.push('/dashboard');
+    return;
+  };
 
   const [chamados, setChamados] = useState<Chamado[]>([]);
   const [loading, setLoading] = useState(true);

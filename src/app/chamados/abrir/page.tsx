@@ -7,7 +7,7 @@ import './abrirChamado.css';
 import { usePerfilRestrito } from '@/hooks/usePerfilRestrito';
 
 export default function AbrirChamadosPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const router = useRouter();
 
   const [funcoesTecnicas, setFuncoesTecnicas] = useState([]);

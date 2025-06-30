@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import '../dashboard.css';
 
-export default function DashboardOM({ usuario }: { usuario: any }) {
+export default function DashboardComando({ usuario }: { usuario: any }) {
     return (
         <>
             <button
@@ -25,18 +25,15 @@ export default function DashboardOM({ usuario }: { usuario: any }) {
                                 <p><strong>Nome:</strong> {usuario.nome}</p>
                                 <p><strong>Email:</strong> {usuario.email}</p>
                                 <p><strong>Perfil:</strong> {usuario.perfil_nome}</p>
-                                {usuario.funcao_tecnica_nome && (
-                                    <p><strong>Função Técnica:</strong> {usuario.funcao_tecnica_nome}</p>
-                                )}
                                 <p><strong>Usuário desde:</strong> {new Date(usuario.criado_em).toLocaleDateString('pt-BR')}</p>
                             </div>
 
                             <div className="dashboard-actions">
-                                <Link href="/chamados/abrir" className="action-button">
-                                    ➕ Abrir Novo Chamado
+                                <Link href="/usuarios" className="action-button">
+                                    👥 Gerenciar Usuários
                                 </Link>
-                                <Link href="/chamados/meus" className="action-button secondary">
-                                    📄 Ver Meus Chamados
+                                <Link href="/chamados/todos" className="action-button">
+                                    📑 Visualizar Todos Chamados
                                 </Link>
                                 <Link href="manuais-documentacoes" className="action-button secondary">
                                     📘 Manuais e Documentação

@@ -14,7 +14,7 @@ type Resposta = {
 
 type RespostasChamadoProps = {
   chamadoId: number;
-  type: 'usuario om' | 'usuario tecnico';
+  type: 'usuario om' | 'usuario tecnico' | 'admin/comando';
   status: string;
 };
 
@@ -28,8 +28,8 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
   const [showStatusModal, setShowStatusModal] = useState(false);
 
   const statusBloqueado = status === 'concluido' || status === 'fechado';
-
-  console.log(statusBloqueado);
+  const podeEnviarResposta = type !== 'admin/comando' && !statusBloqueado;
+  const podeAlterarStatus = type === 'usuario tecnico' || type === 'admin/comando';
 
   const fetchRespostas = async () => {
     const token = localStorage.getItem('token');
@@ -50,14 +50,12 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
     }
   };
 
-  // Carrega as respostas na montagem
   useEffect(() => {
     if (isAuthenticated) {
       fetchRespostas();
     }
   }, [isAuthenticated, chamadoId]);
 
-  // Atualiza respostas a cada 5 minutos
   useEffect(() => {
     if (!isAuthenticated) return;
 
@@ -68,7 +66,6 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
     return () => clearInterval(interval);
   }, [isAuthenticated, chamadoId]);
 
-  // Enviar nova resposta
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setEnviando(true);
@@ -106,7 +103,6 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
     }
   };
 
-  // Atualizar o status do chamado
   const atualizarStatusChamado = async (novoStatus: string) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -178,7 +174,7 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
             Não é possível adicionar novas respostas. O chamado está <strong>{status.replace('_', ' ')}</strong>.
           </p>
 
-          {type === 'usuario tecnico' && (
+          {podeAlterarStatus && (
             <div style={{ marginTop: '1rem' }}>
               <button
                 type="button"
@@ -191,33 +187,37 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
           )}
         </>
       ) : (
-        <form className="resposta-form" onSubmit={handleSubmit}>
-          <textarea
-            className="resposta-textarea"
-            placeholder="Escreva sua resposta..."
-            value={mensagem}
-            onChange={(e) => setMensagem(e.target.value)}
-            required
-          ></textarea>
+        <>
+          {podeEnviarResposta && (
+            <form className="resposta-form" onSubmit={handleSubmit}>
+              <textarea
+                className="resposta-textarea"
+                placeholder="Escreva sua resposta..."
+                value={mensagem}
+                onChange={(e) => setMensagem(e.target.value)}
+                required
+              ></textarea>
 
-          <div className="botoes-acoes">
-            <button type="submit" disabled={enviando}>
-              {enviando ? 'Enviando...' : 'Enviar Resposta'}
-            </button>
-
-            {type === 'usuario tecnico' && (
-              <div>
-                <button
-                  type="button"
-                  className="botao-status"
-                  onClick={() => setShowStatusModal(true)}
-                >
-                  Alterar Status
+              <div className="botoes-acoes">
+                <button type="submit" disabled={enviando}>
+                  {enviando ? 'Enviando...' : 'Enviar Resposta'}
                 </button>
               </div>
-            )}
-          </div>
-        </form>
+            </form>
+          )}
+
+          {podeAlterarStatus && (
+            <div style={{ marginTop: podeEnviarResposta ? '1rem' : '0' }}>
+              <button
+                type="button"
+                className="botao-status"
+                onClick={() => setShowStatusModal(true)}
+              >
+                Alterar Status
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       {feedback && (

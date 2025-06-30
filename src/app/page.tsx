@@ -8,6 +8,12 @@ import { useAuth } from '../context/AuthContext';
 export default function LoginPage() {
   const router = useRouter();
 
+  const jaLogado = localStorage.getItem('token');
+  if (jaLogado) {
+    router.push('/dashboard');
+    return;
+  } 
+
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
