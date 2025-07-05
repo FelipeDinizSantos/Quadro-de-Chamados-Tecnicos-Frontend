@@ -7,6 +7,7 @@
 }
 
 .chamado-item {
+  width: 70%;
   position: relative;
   border: 1px solid #e5e7eb;
   border-radius: 0.75rem;
@@ -123,4 +124,37 @@
 .status-fechado {
   background-color: #fef2f2;
   color: #991b1b;
+}
+
+.chamado-protocolo {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2563eb;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+}
+
+.filtro-container {
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+}
+
+.input-filtro {
+  width: 60%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: #374151;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-filtro:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
 }

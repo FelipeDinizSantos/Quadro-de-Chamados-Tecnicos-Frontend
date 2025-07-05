@@ -11,6 +11,7 @@ type Chamado = {
   id: number;
   titulo: string;
   descricao: string;
+  protocolo: string;
   status: string;
   criado_em: string;
   categoria_nome?: string;
@@ -50,6 +51,7 @@ export default function DetalhesChamadoPage() {
         }
 
         const data = await res.json();
+
         setChamado(data.chamado);
       } catch (err: any) {
         setErro(err.message);
@@ -86,10 +88,13 @@ export default function DetalhesChamadoPage() {
     <div className="container">
       <div className="inner">
         <div className="chamado-item">
-          
-        <BotaoRetorno path='/dashboard' />
+
+          <BotaoRetorno path='/dashboard' />
           <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
             {chamado.status === "em_andamento" ? 'EM ANDAMENTO' : chamado.status.toUpperCase()}
+          </span>
+          <span className="chamado-protocolo">
+            Protocolo: {chamado.protocolo}
           </span>
           <h2 className="chamado-titulo">{chamado.titulo}</h2>
           <p className="chamado-descricao">{chamado.descricao}</p>

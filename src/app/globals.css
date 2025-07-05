@@ -1,3 +1,10 @@
+#__next-build-watcher,
+#__next-error-overlay,
+.nextjs-portal {
+  display: none !important;
+}
+
+
 html, body{
   margin: 0;
   padding: 0;

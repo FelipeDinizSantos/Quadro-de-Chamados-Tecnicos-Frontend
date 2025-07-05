@@ -15,6 +15,7 @@ type Chamado = {
     status: string;
     criado_em: string;
     categoria_nome?: string;
+    protocolo: string;
     funcao_tecnica_nome?: string;
     tecnico_id?: number;
     tecnico_nome?: string;
@@ -31,11 +32,12 @@ export default function TodosChamadosPage() {
     if (user && user?.perfil_id < 3) {
         router.push('/dashboard');
         return;
-    };
+    }
 
     const [chamados, setChamados] = useState<Chamado[]>([]);
     const [loading, setLoading] = useState(true);
     const [erro, setErro] = useState('');
+    const [filtro, setFiltro] = useState('');
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -74,6 +76,11 @@ export default function TodosChamadosPage() {
         fetchChamados();
     }, []);
 
+    const chamadosFiltrados = chamados.filter((chamado) =>
+        (chamado.titulo?.toLowerCase() || '').includes(filtro.toLowerCase()) ||
+        (chamado.protocolo?.toLowerCase() || '').includes(filtro.toLowerCase())
+    );
+
     if (!isAuthenticated) {
         return <p>Carregando...</p>;
     }
@@ -82,24 +89,45 @@ export default function TodosChamadosPage() {
         <div className="container">
             <div className="inner">
                 <div className="card">
-
                     <BotaoRetorno path='/dashboard' />
+
                     <div className="card-content">
                         <h1 className="form-title">Todos os Chamados Abertos</h1>
+
+                        <div className="filtro-container">
+                            <input
+                                type="text"
+                                placeholder="Filtrar por título ou protocolo..."
+                                value={filtro}
+                                onChange={(e) => setFiltro(e.target.value)}
+                                className="input-filtro"
+                            />
+                        </div>
 
                         {loading && <p>Carregando chamados...</p>}
                         {erro && <p style={{ color: 'red' }}>{erro}</p>}
 
-                        {!loading && chamados.length === 0 && (
+                        {!loading && !erro && chamados.length === 0 && (
                             <p style={{ color: '#6b7280' }}>Nenhum chamado encontrado.</p>
                         )}
 
+                        {!loading && !erro && chamados.length > 0 && chamadosFiltrados.length === 0 && (
+                            <p style={{ color: '#6b7280' }}>
+                                Nenhum chamado encontrado para o filtro digitado.
+                            </p>
+                        )}
+
                         <div className="chamados-list">
-                            {chamados.map((chamado) => (
+                            {chamadosFiltrados.map((chamado) => (
                                 <div key={chamado.id} className="chamado-item">
                                     <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
                                         {chamado.status === "em_andamento" ? 'EM ANDAMENTO' : chamado.status.toUpperCase()}
                                     </span>
+
+                                    <span className="chamado-protocolo">
+                                        Protocolo: {chamado.protocolo}
+                                    </span>
+
                                     <h2 className="chamado-titulo">{chamado.titulo}</h2>
                                     <p className="chamado-descricao">{chamado.descricao}</p>
 
