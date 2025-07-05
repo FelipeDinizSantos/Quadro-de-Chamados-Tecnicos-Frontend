@@ -4,7 +4,6 @@ import { useAuth } from '../../../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import '../chamados.css';
-import './detalhesChamado.css'
 import RespostasChamado from '@/components/RespostaChamados';
 import BotaoRetorno from '@/components/BotaoRetorno';
 
@@ -82,8 +81,6 @@ export default function DetalhesChamadoPage() {
     console.log('Admin/Comando');
     respostaType = 'admin/comando';
   }
-
-  console.log(user?.perfil_id);
 
   return (
     <div className="container">

@@ -19,6 +19,26 @@ export default function LogsPage() {
     const { isAuthenticated, user } = useAuth();
     const router = useRouter();
 
+    // Filtros
+    const [usuarioId, setUsuarioId] = useState('');
+    const [acao, setAcao] = useState('');
+    const [dataInicio, setDataInicio] = useState('');
+    const [dataFim, setDataFim] = useState('');
+
+    useEffect(() => {
+        if (!usuarioId && !acao && !dataInicio && !dataFim) {
+            fetchLogs();
+        }
+    }, [usuarioId, acao, dataInicio, dataFim]);
+
+
+    const limparFiltros = () => {
+        setUsuarioId('');
+        setAcao('');
+        setDataInicio('');
+        setDataFim('');
+    }
+
     if (user?.perfil_id !== 4) {
         router.push('/dashboard');
         return;
@@ -27,12 +47,6 @@ export default function LogsPage() {
     const [logs, setLogs] = useState<LogItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [erro, setErro] = useState('');
-
-    // Filtros
-    const [usuarioId, setUsuarioId] = useState('');
-    const [acao, setAcao] = useState('');
-    const [dataInicio, setDataInicio] = useState('');
-    const [dataFim, setDataFim] = useState('');
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -101,9 +115,17 @@ export default function LogsPage() {
                                     <input type="date" value={dataFim} onChange={e => setDataFim(e.target.value)} />
                                 </label>
                             </div>
-                            <button className="action-button" onClick={fetchLogs}>
-                                Aplicar Filtros
-                            </button>
+                            <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                                <button className="action-button" onClick={fetchLogs}>
+                                    Aplicar Filtros
+                                </button>
+                                <button
+                                    className="action-button secondary"
+                                    onClick={limparFiltros}
+                                >
+                                    Limpar Filtros
+                                </button>
+                            </div>
                         </section>
 
                         {loading && <p>Carregando logs...</p>}

@@ -170,19 +170,19 @@
   color: white;
 }
 
-.status-andamento {
+.status-opcao-andamento {
   background-color: #2563eb;
 }
 
-.status-concluido {
+.status-opcao-concluido {
   background-color: #16a34a;
 }
 
-.status-fechado {
+.status-opcao-fechado {
   background-color: #f87171;
 }
 
-.status-cancelar {
+.status-opcao-cancelar {
   background-color: transparent;
   border: 1px solid black;
   padding: 0.4rem;

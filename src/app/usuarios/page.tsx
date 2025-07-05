@@ -16,6 +16,7 @@ type Usuario = {
     perfil_nome: string;
     funcao_tecnica_id?: number | null;
     funcao_tecnica_nome?: string | null;
+    is_deleted: 0 | 1;
     criado_em: string;
 };
 
@@ -84,8 +85,10 @@ export default function UsuariosPage() {
                     filtrados = data;
                 }
 
-                setUsuariosOriginais(filtrados);
-                setUsuariosFiltrados(filtrados);
+                const deletados = filtrados.filter((u: Usuario) => u.is_deleted === 0);
+
+                setUsuariosOriginais(deletados);
+                setUsuariosFiltrados(deletados);
 
             } catch (error: any) {
                 setErro(error.message);

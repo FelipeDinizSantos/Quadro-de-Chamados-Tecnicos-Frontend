@@ -61,6 +61,11 @@ export default function UsuarioDetalhesPage() {
     // Verifica se o usuário atual é admin
     const isAdmin = user?.perfil_id === 4;
 
+    if(user && user.perfil_id < 3){
+        router.push("/dashboard");
+        return;
+    }
+
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/');
@@ -84,7 +89,13 @@ export default function UsuarioDetalhesPage() {
 
                 const data = await res.json();
 
-                console.log(data);
+                if(data.usuario.is_deleted){
+                    alert("Este usuário foi excluido!");
+
+                    if(typeof window !== "undefined"){
+                        window.history.back();
+                    }
+                }
 
                 setUsuario(data.usuario);
                 setChamadosAbertos(data.chamadosAbertos || []);
@@ -146,10 +157,15 @@ export default function UsuarioDetalhesPage() {
     };
 
     const handlePromoverParaTecnico = async () => {
+        console.log(selectedFuncaoId);
+        
         if (!selectedFuncaoId) {
             alert('Selecione uma função técnica para promoção.');
             return;
         }
+        
+        const confirmar = window.confirm('Tem certeza que deseja promover este usuário para Técnico?');
+        if (!confirmar) return;
 
         setSaving(true);
         const token = localStorage.getItem('token');
@@ -233,11 +249,6 @@ export default function UsuarioDetalhesPage() {
         const token = localStorage.getItem('token');
 
         try {
-            if (chamadosAbertos.length > 0 || chamadosRespondidos.length > 0) {
-                alert('Não é possível excluir este usuário, pois está ligado a chamados.');
-                return;
-            }
-
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/usuarios/${usuario?.id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` },
@@ -307,7 +318,7 @@ export default function UsuarioDetalhesPage() {
                                             <button
                                                 className="action-button"
                                                 onClick={handlePromoverParaTecnico}
-                                                disabled={saving || !selectedFuncaoId}
+                                                disabled={saving}
                                             >
                                                 {saving ? 'Salvando...' : 'Promover para Técnico'}
                                             </button>

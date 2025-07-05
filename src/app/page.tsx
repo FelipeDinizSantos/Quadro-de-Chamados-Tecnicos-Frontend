@@ -56,11 +56,9 @@ export default function LoginPage() {
   return (
     <div className="container">
       <div className="inner">
-        <p className="title">Quadro de Chamados Técnicos</p>
         <div className="card">
           <div className="card-content">
             <h1 className="form-title">Entre com seus dados</h1>
-
             <form className="form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="email">E-mail</label>

@@ -231,25 +231,25 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
           <div className="status-modal">
             <h4>Alterar Status do Chamado</h4>
             <button
-              className="status-opcao status-andamento"
+              className="status-opcao status-opcao-andamento"
               onClick={() => handleChangeStatus('em_andamento')}
             >
               Em Andamento
             </button>
             <button
-              className="status-opcao status-concluido"
+              className="status-opcao status-opcao-concluido"
               onClick={() => handleChangeStatus('concluido')}
             >
               Concluído
             </button>
             <button
-              className="status-opcao status-fechado"
+              className="status-opcao status-opcao-fechado"
               onClick={() => handleChangeStatus('fechado')}
             >
               Fechado
             </button>
             <button
-              className="status-cancelar"
+              className="status-opcao-cancelar"
               onClick={() => setShowStatusModal(false)}
             >
               Cancelar

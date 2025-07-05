@@ -65,7 +65,7 @@ export default function RegistroPage() {
 
                         <form className="form" onSubmit={handleSubmit}>
                             <div className="form-group">
-                                <label htmlFor="name">Nome completo</label>
+                                <label htmlFor="name">Nome</label>
                                 <input
                                     type="text"
                                     name="name"
