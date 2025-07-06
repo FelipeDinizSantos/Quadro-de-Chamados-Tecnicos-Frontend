@@ -158,3 +158,135 @@
   border-color: #2563eb;
   box-shadow: 0 0 0 1px #2563eb;
 }
+
+.tabela-chamados-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabela-chamados {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.tabela-chamados thead {
+  background-color: #f9fafb;
+}
+
+.tabela-chamados th,
+.tabela-chamados td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.tabela-chamados th {
+  font-weight: 600;
+  color: #374151;
+}
+
+.tabela-chamados td {
+  color: #374151;
+  vertical-align: top;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Reaproveitando cores de status existentes */
+.status-aberto {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-em_andamento {
+  background-color: #fef9c3 !important;
+  color: #92400e !important;
+}
+
+.status-finalizado, .status-concluido {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.status-fechado {
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+
+.paginacao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.paginacao button {
+  padding: 0.5rem 1rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+}
+
+.paginacao button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.paginacao button:hover:not(:disabled) {
+  background-color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .tabela-chamados thead {
+    display: none;
+  }
+
+  .tabela-chamados, 
+  .tabela-chamados tbody, 
+  .tabela-chamados tr, 
+  .tabela-chamados td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabela-chamados tr {
+    margin-bottom: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+  }
+
+  .tabela-chamados td {
+    border: none;
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .tabela-chamados td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem;
+    font-weight: 600;
+    color: #6b7280;
+    width: 45%;
+    white-space: nowrap;
+  }
+}

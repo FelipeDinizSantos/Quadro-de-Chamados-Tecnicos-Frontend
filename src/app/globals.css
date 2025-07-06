@@ -31,8 +31,8 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70rem;  
     position: relative;
+    width: 80%;
 }
 
 .card {

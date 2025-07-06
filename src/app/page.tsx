@@ -7,12 +7,13 @@ import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const jaLogado = localStorage.getItem('token');
   if (jaLogado) {
     router.push('/dashboard');
     return;
-  } 
+  }
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -73,18 +74,29 @@ export default function LoginPage() {
                 />
               </div>
 
-              <div className="form-group">
+              <div className="form-group password-group">
                 <label htmlFor="password">Senha</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  required
-                  value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
-                />
+                <div className="password-input-wrapper">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    id="password"
+                    placeholder="••••••••"
+                    required
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                  />
+                  <button
+                    type="button"
+                    className="toggle-password"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
+                  >
+                    {showPassword ? '🔓' : '🔒'}
+                  </button>
+                </div>
               </div>
+
 
               {erro && <p style={{ color: 'red' }}>{erro}</p>}
 
