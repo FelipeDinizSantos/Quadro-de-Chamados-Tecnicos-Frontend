@@ -71,7 +71,7 @@ export default function DetalhesChamadoPage() {
 
   if (!chamado) return <p>Chamado não encontrado.</p>;
 
-  let respostaType;
+  let respostaType:'usuario om'|'usuario tecnico'|'admin/comando' = 'usuario om';
 
   if (user?.perfil_id === 1) {
     respostaType = 'usuario om';

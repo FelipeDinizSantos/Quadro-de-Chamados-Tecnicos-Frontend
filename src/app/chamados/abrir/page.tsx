@@ -220,7 +220,7 @@ export default function AbrirChamadosPage() {
                   onChange={handleChange}
                 >
                   <option value="">Selecione uma categoria</option>
-                  {categorias.map((categoria) => (
+                  {categorias.map((categoria:{id:number, nome:string}) => (
                     <option key={categoria.id} value={categoria.id}>
                       {categoria.nome}
                     </option>
