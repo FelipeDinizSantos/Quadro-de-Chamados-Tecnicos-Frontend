@@ -145,6 +145,8 @@ export default function AbrirChamadosPage() {
         atribuido_usuario_id: '',
       });
       setUsuariosTecnicos([]);
+
+      router.push('/chamados/meus');
     } catch (error: any) {
       setMensagem(error.message);
     } finally {

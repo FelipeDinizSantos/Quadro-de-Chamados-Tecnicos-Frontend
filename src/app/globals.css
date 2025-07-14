@@ -127,12 +127,9 @@ button[type="submit"]:hover {
 header{
     display: flex;
     justify-content: center;
-    width: 100%;
+    padding: 1rem;
 }
 
-.titulo-principal{
-    padding: .5rem 0;
-    font-size: .8rem;
+.logo{
     margin-bottom: 2rem;
-    cursor: pointer;
 }

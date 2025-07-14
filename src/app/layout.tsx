@@ -3,6 +3,8 @@ import { Montserrat } from 'next/font/google'
 import Link from "next/link";
 
 import { AuthProvider } from '../context/AuthContext';
+import Image from "next/image";
+import Head from "next/head";
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -20,6 +22,11 @@ const montserrat = Montserrat({
   display: 'swap',
 })
 
+export const metadata = {
+  title: 'Quadro de Chamados Técnicos',
+  description: 'Sem Descrição',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +38,12 @@ export default function RootLayout({
         <AuthProvider>
           <header className="titulo-principal">
             <Link href="/dashboard">
-              <h1>Quadro de Comunicação Técnica</h1>
+              <Image
+                src="/img/logo_batalhao.jpg"
+                alt="logo do batalhão"
+                width={85}
+                height={85}
+              />
             </Link>
           </header>
           {children}

@@ -61,7 +61,7 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
 
     const interval = setInterval(() => {
       fetchRespostas();
-    }, 300000); // 5 minutos
+    }, 30000); // 30 segundos
 
     return () => clearInterval(interval);
   }, [isAuthenticated, chamadoId]);
@@ -200,7 +200,7 @@ export default function RespostasChamado({ chamadoId, type, status }: RespostasC
 
               <div className="botoes-acoes">
                 <button type="submit" disabled={enviando}>
-                  {enviando ? 'Enviando...' : 'Enviar Resposta'}
+                  {enviando ? 'Enviando...' : 'Enviar'}
                 </button>
               </div>
             </form>

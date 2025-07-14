@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import BotaoRetorno from '@/components/BotaoRetorno';
 
+import "./Registro.css";
+
 export default function RegistroPage() {
     const router = useRouter();
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -14,6 +16,8 @@ export default function RegistroPage() {
     const [confirmSenha, setConfirmSenha] = useState('');
     const [erro, setErro] = useState('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -56,13 +60,10 @@ export default function RegistroPage() {
     return (
         <div className="container">
             <div className="inner">
-                <p className="title">Criação de Conta</p>
                 <div className="card">
-
                     <BotaoRetorno path='/' />
                     <div className="card-content">
                         <h1 className="form-title">Registre-se</h1>
-
                         <form className="form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="name">Nome</label>
@@ -76,6 +77,7 @@ export default function RegistroPage() {
                                     onChange={(e) => setNome(e.target.value)}
                                 />
                             </div>
+
                             <div className="form-group">
                                 <label htmlFor="email">E-mail</label>
                                 <input
@@ -88,29 +90,51 @@ export default function RegistroPage() {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
-                            <div className="form-group">
+
+                            <div className="form-group password-group">
                                 <label htmlFor="password">Senha</label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    placeholder="••••••••"
-                                    required
-                                    value={senha}
-                                    onChange={(e) => setSenha(e.target.value)}
-                                />
+                                <div className="password-input-wrapper">
+                                    <input
+                                        type={showPassword ? 'text' : 'password'}
+                                        name="password"
+                                        id="password"
+                                        placeholder="••••••••"
+                                        required
+                                        value={senha}
+                                        onChange={(e) => setSenha(e.target.value)}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="toggle-password"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        aria-label={showPassword ? "Esconder senha" : "Mostrar senha"}
+                                    >
+                                        {showPassword ? '🔓' : '🔒'}
+                                    </button>
+                                </div>
                             </div>
-                            <div className="form-group">
+
+                            <div className="form-group password-group">
                                 <label htmlFor="confirmPassword">Confirmar senha</label>
-                                <input
-                                    type="password"
-                                    name="confirmPassword"
-                                    id="confirmPassword"
-                                    placeholder="••••••••"
-                                    required
-                                    value={confirmSenha}
-                                    onChange={(e) => setConfirmSenha(e.target.value)}
-                                />
+                                <div className="password-input-wrapper">
+                                    <input
+                                        type={showConfirmPassword ? 'text' : 'password'}
+                                        name="confirmPassword"
+                                        id="confirmPassword"
+                                        placeholder="••••••••"
+                                        required
+                                        value={confirmSenha}
+                                        onChange={(e) => setConfirmSenha(e.target.value)}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="toggle-password"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                        aria-label={showConfirmPassword ? "Esconder senha" : "Mostrar senha"}
+                                    >
+                                        {showConfirmPassword ? '🔓' : '🔒'}
+                                    </button>
+                                </div>
                             </div>
 
                             {erro && <p style={{ color: 'red' }}>{erro}</p>}
