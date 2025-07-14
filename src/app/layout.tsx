@@ -25,6 +25,9 @@ const montserrat = Montserrat({
 export const metadata = {
   title: 'Quadro de Chamados Técnicos',
   description: 'Sem Descrição',
+  icons: {
+    icon: '/img/logo_batalhao.jpg',  
+  },
 };
 
 export default function RootLayout({
