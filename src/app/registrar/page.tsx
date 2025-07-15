@@ -19,12 +19,23 @@ export default function RegistroPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+    // Validações de política de senha
+    const senhaTem8Caracteres = senha.length >= 8;
+    const senhaTemLetra = /[A-Za-z]/.test(senha);
+    const senhaTemNumero = /[0-9]/.test(senha);
+    const senhaValida = senhaTem8Caracteres && senhaTemLetra && senhaTemNumero;
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setErro('');
 
         if (senha !== confirmSenha) {
             setErro('As senhas não coincidem.');
+            return;
+        }
+
+        if (!senhaValida) {
+            setErro('A senha não atende aos requisitos de segurança.');
             return;
         }
 
@@ -112,6 +123,32 @@ export default function RegistroPage() {
                                         {showPassword ? '🔓' : '🔒'}
                                     </button>
                                 </div>
+
+                                <div className="password-policy">
+                                    <p
+                                        className={
+                                            senha.length === 0
+                                                ? 'neutral'
+                                                : senhaTem8Caracteres
+                                                    ? 'valid'
+                                                    : 'invalid'
+                                        }
+                                    >
+                                        • Pelo menos 8 caracteres
+                                    </p>
+                                    <p
+                                        className={
+                                            senha.length === 0
+                                                ? 'neutral'
+                                                : (senhaTemLetra && senhaTemNumero)
+                                                    ? 'valid'
+                                                    : 'invalid'
+                                        }
+                                    >
+                                        • Deve conter letras e números
+                                    </p>
+                                </div>
+
                             </div>
 
                             <div className="form-group password-group">
@@ -137,7 +174,7 @@ export default function RegistroPage() {
                                 </div>
                             </div>
 
-                            {erro && <p style={{ color: 'red' }}>{erro}</p>}
+                            {erro && <p className="error-message">{erro}</p>}
 
                             <button type="submit" disabled={loading}>
                                 {loading ? 'Registrando...' : 'Registrar'}
