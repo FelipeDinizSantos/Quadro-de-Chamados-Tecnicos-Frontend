@@ -20,7 +20,10 @@
 .respostas-historico {
   display: flex;
   flex-direction: column;
+  max-height: 20rem !important;
+  overflow-y: auto;
   gap: 0.5rem;
+  padding: 0 .5rem;
 }
 
 /* Item de resposta */

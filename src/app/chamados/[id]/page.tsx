@@ -4,6 +4,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import '../chamados.css';
+import './chamado.css';
 import RespostasChamado from '@/components/RespostaChamados';
 import BotaoRetorno from '@/components/BotaoRetorno';
 

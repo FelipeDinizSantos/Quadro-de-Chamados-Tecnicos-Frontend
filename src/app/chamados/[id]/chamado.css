@@ -1,0 +1,7 @@
+.chamado-card-descricao {
+  display: flex !important;
+  -webkit-line-clamp: 0;
+  -webkit-box-orient: none;
+  overflow: none;
+  text-overflow: none;
+}

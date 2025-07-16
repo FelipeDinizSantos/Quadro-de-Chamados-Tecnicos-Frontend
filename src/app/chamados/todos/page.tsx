@@ -39,7 +39,6 @@ export default function TodosChamadosPage() {
     const [erro, setErro] = useState('');
     const [filtro, setFiltro] = useState('');
 
-    // paginação
     const [paginaAtual, setPaginaAtual] = useState(1);
     const itensPorPagina = 10;
 

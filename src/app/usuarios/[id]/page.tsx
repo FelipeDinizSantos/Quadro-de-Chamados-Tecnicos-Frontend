@@ -287,13 +287,13 @@ export default function UsuarioDetalhesPage() {
                                 <div className="dashboard-actions">
                                     {isAdmin && usuario.perfil_id === 1 && (
                                         <div className="admin-promo-section">
-                                            <h3 className="promo-title">Promoção Administrativa</h3>
+                                            <h3 className="promo-title">Promover usuário para Comando</h3>
                                             <button
                                                 className="action-button highlight"
                                                 onClick={handlePromoverParaComando}
                                                 disabled={saving}
                                             >
-                                                {saving ? 'Processando...' : 'Promover para Comando'}
+                                                {saving ? 'Processando...' : 'Promover'}
                                             </button>
                                         </div>
                                     )}

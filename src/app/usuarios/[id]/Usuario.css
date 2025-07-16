@@ -27,6 +27,12 @@
   font-size: 0.875rem;
   margin-top: -.5rem;
   color: #374151;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chamado-info {
@@ -289,26 +295,26 @@
 }
 
 .admin-promo-section {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background-color: #f8f9fa;
-    border-radius: 0.5rem;
-    border: 1px solid #e9ecef;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  border: 1px solid #e9ecef;
 }
 
 .promo-title {
-    font-size: 1rem;
-    color: #495057;
-    margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #495057;
+  margin-bottom: 0.75rem;
 }
 
 /* Botão destacado para promoção */
 .action-button.highlight {
-    background-color: #28a745;
-    border-color: #28a745;
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
 .action-button.highlight:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
+  background-color: #218838;
+  border-color: #1e7e34;
 }
