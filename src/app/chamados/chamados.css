@@ -30,6 +30,11 @@
   margin-top: -.5rem;
   color: #374151;
 
+  text-align: justify;
+  overflow-y: auto;
+
+  max-height: 15rem;
+
   word-wrap: break-word;
   overflow-wrap: break-word;
 }

@@ -6,6 +6,17 @@ import { AuthProvider } from '../context/AuthContext';
 import Image from "next/image";
 import Head from "next/head";
 
+type UsuarioPerfil = {
+  id: number;
+  nome: string;
+  email: string;
+  criado_em: string;
+  perfil_id: number;
+  perfil_nome: string;
+  funcao_tecnica_id?: number;
+  funcao_tecnica_nome?: string;
+};
+
 const montserrat = Montserrat({
   subsets: ['latin'],
   weight: [
@@ -26,7 +37,7 @@ export const metadata = {
   title: 'Quadro de Chamados Técnicos',
   description: 'Sem Descrição',
   icons: {
-    icon: '/img/logo_batalhao.jpg',  
+    icon: '/img/logo_batalhao.jpg',
   },
 };
 

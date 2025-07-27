@@ -374,7 +374,7 @@ export default function UsuarioDetalhesPage() {
                                 ) : (
                                     <div className="chamados-list">
                                         {chamadosAbertos.map((chamado) => (
-                                            <div key={chamado.id} className="chamado-item">
+                                            <div key={chamado.id} className="chamado-user-item">
                                                 <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
                                                     {chamado.status === "em_andamento" ? 'EM ANDAMENTO' : chamado.status.toUpperCase()}
                                                 </span>
@@ -403,7 +403,7 @@ export default function UsuarioDetalhesPage() {
                                 ) : (
                                     <div className="chamados-list">
                                         {chamadosRespondidos.map((chamado) => (
-                                            <div key={chamado.id} className="chamado-item">
+                                            <div key={chamado.id} className="chamado-user-item">
                                                 <span className={`chamado-status status-${chamado.status.toLowerCase()}`}>
                                                     {chamado.status === "em_andamento" ? 'EM ANDAMENTO' : chamado.status.toUpperCase()}
                                                 </span>

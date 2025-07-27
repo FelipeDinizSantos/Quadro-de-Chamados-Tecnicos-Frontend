@@ -9,6 +9,7 @@ type User = {
   email: string;
   perfil_id: number;
   funcao_tecnica_id: number;
+  email_verificado: boolean; 
 };
 
 type AuthContextType = {

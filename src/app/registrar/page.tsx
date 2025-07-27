@@ -14,6 +14,7 @@ export default function RegistroPage() {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
+    const [posto, setPosto] = useState('');
     const [erro, setErro] = useState('');
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +30,11 @@ export default function RegistroPage() {
         e.preventDefault();
         setErro('');
 
+        if (!posto) {
+            setErro('Selecione um posto ou graduação.');
+            return;
+        }
+
         if (senha !== confirmSenha) {
             setErro('As senhas não coincidem.');
             return;
@@ -42,12 +48,14 @@ export default function RegistroPage() {
         try {
             setLoading(true);
 
+            const nomeComPosto = `${posto}. ${nome}`;
+
             const response = await fetch(`${API_URL}/auth/registro`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ nome, email, senha }),
+                body: JSON.stringify({ nome: nomeComPosto, email, senha }),
             });
 
             const data = await response.json();
@@ -76,6 +84,33 @@ export default function RegistroPage() {
                     <div className="card-content">
                         <h1 className="form-title">Registre-se</h1>
                         <form className="form" onSubmit={handleSubmit}>
+
+                            <div className="form-group">
+                                <label htmlFor="posto">Posto/Graduação</label>
+                                <select
+                                    id="posto"
+                                    name="posto"
+                                    required
+                                    value={posto}
+                                    onChange={(e) => setPosto(e.target.value)}
+                                >
+                                    <option value="">Selecione...</option>
+                                    <option value="Sd">Soldado</option>
+                                    <option value="Cb">Cabo</option>
+                                    <option value="3º Sgt">3º Sargento</option>
+                                    <option value="2º Sgt">2º Sargento</option>
+                                    <option value="1º Sgt">1º Sargento</option>
+                                    <option value="Sub Ten">Subtenente</option>
+                                    <option value="Asp Of">Aspirante-a-Oficial</option>
+                                    <option value="2º Ten">2º Tenente</option>
+                                    <option value="1º Ten">1º Tenente</option>
+                                    <option value="Cap">Capitão</option>
+                                    <option value="Maj">Major</option>
+                                    <option value="Ten Cel">Tenente-Coronel</option>
+                                    <option value="Cel">Coronel</option>
+                                </select>
+                            </div>
+
                             <div className="form-group">
                                 <label htmlFor="name">Nome</label>
                                 <input
@@ -125,30 +160,17 @@ export default function RegistroPage() {
                                 </div>
 
                                 <div className="password-policy">
-                                    <p
-                                        className={
-                                            senha.length === 0
-                                                ? 'neutral'
-                                                : senhaTem8Caracteres
-                                                    ? 'valid'
-                                                    : 'invalid'
-                                        }
-                                    >
+                                    <p className={
+                                        senha.length === 0 ? 'neutral' :
+                                            senhaTem8Caracteres ? 'valid' : 'invalid'}>
                                         • Pelo menos 8 caracteres
                                     </p>
-                                    <p
-                                        className={
-                                            senha.length === 0
-                                                ? 'neutral'
-                                                : (senhaTemLetra && senhaTemNumero)
-                                                    ? 'valid'
-                                                    : 'invalid'
-                                        }
-                                    >
+                                    <p className={
+                                        senha.length === 0 ? 'neutral' :
+                                            (senhaTemLetra && senhaTemNumero) ? 'valid' : 'invalid'}>
                                         • Deve conter letras e números
                                     </p>
                                 </div>
-
                             </div>
 
                             <div className="form-group password-group">

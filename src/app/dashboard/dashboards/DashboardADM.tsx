@@ -15,6 +15,8 @@ export default function DashboardAdmin({ usuario }: { usuario: any }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        console.log(usuario);
+
         const fetchEstatisticas = async () => {
             try {
                 const token = localStorage.getItem('token');

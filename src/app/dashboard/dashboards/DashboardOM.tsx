@@ -70,7 +70,7 @@ export default function DashboardOM({ usuario }: { usuario: any }) {
                 <div className="inner">
                     <div className="card">
                         <div className="card-content">
-                            <h1 className="form-title">Bem-vindo(a)</h1>
+                            <h1 className="form-title">Bem-vindo</h1>
                             <div className="perfil-info">
                                 <p><strong>Nome:</strong> {usuario.nome}</p>
                                 <p><strong>Email:</strong> {usuario.email}</p>
